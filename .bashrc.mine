@@ -103,5 +103,7 @@ function loaddpcpp
     module load dpcpp
 }
 
-date
+# Add in any of my fucntions/tools
+. ~/.shell-tools/.modloaddiff 
+
 ~              
