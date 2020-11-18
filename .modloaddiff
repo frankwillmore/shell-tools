@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function modloaddiff()
+{
+  before=$(mktemp) 
+  after=$(mktemp) 
+  env > $before
+  module load $*
+  env > $after
+  diff $before $after
+
+  # cleanup
+  module unload $*
+  rm $before $after
+}
