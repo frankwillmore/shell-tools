@@ -7,20 +7,19 @@ export https_proxy=http://proxy:3128
 export HTTP_PROXY=http://proxy:3128
 export http_proxy=http://proxy:3128
 
-
 alias interactive='qsub -A Operations -n 1 -t 360 -I -q gomez'
 alias iris-debug='qsub -A Operations -n 1 -t 30 -I -q iris_debug'
 alias iris='qsub -A Operations -n 1 -t 360 -I -q iris'
-
 alias yarrow-debug='qsub -A Operations -n 1 -t 360 -I -q yarrow_debug'
-
+alias clear-logs='rm *.{output,error,cobaltlog}'
 alias ll='ls -l'
+
+export PS1="熊俊傑@\h:\w$ "
+
 function cdx
 {
   cd $(dirname $(which $1))
 }
-
-export PS1="熊俊傑@\h:\w$ "
 
 if [[ $(hostname) =~ "login" ]]
 then
@@ -38,6 +37,11 @@ function explode_path
         EXPLODE_PATH=$(env | grep "^${1}\=" | cut -d "=" -f2)
     fi
     echo $EXPLODE_PATH | sed -e "s/:/\n/g"
+}
+
+function fullpath()
+{
+    echo $(pwd)/$1
 }
 
 function load_spack 
@@ -104,6 +108,7 @@ function loaddpcpp
 }
 
 # Add in any of my fucntions/tools
-. ~/.shell-tools/.modloaddiff 
+. /home/willmore/.shell-tools/.modloaddiff 
+. /home/willmore/.shell-tools/.scope2env  
 
-~              
+              
