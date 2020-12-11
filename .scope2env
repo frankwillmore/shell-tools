@@ -2,7 +2,7 @@
 
 scope2env()
 {
-    if [ $1 == "--help" ] 
+    if [ "$1" == "--help" ] 
     then
         echo "usage: scope2env [ scope_dir ] [ dest_dir ]"
         echo "       if no scope_dir specified, will use current dir" 
@@ -24,8 +24,7 @@ scope2env()
         dest_dir="$2/"
     fi
 
-    [ -e ${dest_dir}spack.yaml ] && 
-        mv ${dest_dir}spack.yaml  ${dest_dir}~spack.yaml  
+    [ -e ${dest_dir}spack.yaml ] && mv ${dest_dir}spack.yaml ${dest_dir}spack.yaml.bak  
 
     [ -z $DEBUG ] || 
         printf "using scope_dir=$scope_dir and dest_dir=$dest_dir:\n" 
@@ -36,10 +35,10 @@ scope2env()
 
     for yaml in $(ls ${scope_dir}*.yaml) 
     do
-        [ -z $DEBUG ] || 
-            printf "reading yaml=$yaml\n" >> /dev/stderr 
         # Skip spack.yaml if it exists
         [[ $(basename $yaml) == "spack.yaml" ]] && continue
+        [ -z $DEBUG ] || 
+            printf "reading yaml=$yaml\n" >> /dev/stderr 
         while IFS="\n" read -r line 
         do
             printf "  $line\n" >> ${dest_dir}spack.yaml
