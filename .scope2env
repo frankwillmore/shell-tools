@@ -24,6 +24,9 @@ scope2env()
         dest_dir="$2/"
     fi
 
+    [ -e ${dest_dir}spack.yaml ] && 
+        mv ${dest_dir}spack.yaml  ${dest_dir}~spack.yaml  
+
     [ -z $DEBUG ] || 
         printf "using scope_dir=$scope_dir and dest_dir=$dest_dir:\n" 
         >> /dev/stderr 
