@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# Basics
+
+export PS1="熊俊傑@\h:\W$ "
+
+# Aliases
+
+alias ll='ls -l'
+alias la='ls -la'
+
+#alias interactive='qsub -A Operations -n 1 -t 360 -I -q gomez'
+#alias iris-debug='qsub -A Operations -n 1 -t 30 -I -q iris_debug'
+#alias iris='qsub -A Operations -n 1 -t 360 -I -q iris'
+#alias yarrow-debug='qsub -A Operations -n 1 -t 360 -I -q yarrow_debug'
+#alias clear-logs='rm *.{output,error,cobaltlog}'
+
+
+# Exports and environment
+
+export PS1="熊俊傑@\h:\w$ "
+
+
+# Includes
+
+# . ~/.shell-tools/some_file.sh
+
+# Shell functions
+
+function cdx
+{
+  cd $(dirname $(which $1))
+}
+
+function explode_path 
+{
+    local EXPLODE_PATH
+    if [ "$1" == "" ]
+    then
+        EXPLODE_PATH=$PATH
+    else
+        EXPLODE_PATH=$(env | grep "^${1}\=" | cut -d "=" -f2)
+    fi
+    echo $EXPLODE_PATH | sed -e "s/:/\n/g"
+}
+
+function fullpath()
+{
+    echo $(pwd)/$1
+}
+
+function load_spack 
+{
+    if [ "$1" == "-h" ]
+    then
+        echo "        load_spack:" 
+        echo
+        echo "        loads the spack instance from the root specified, or from ${HOME}/spack if none specified."
+    elif [ x"$1" == x"" ]
+    then
+        . ${HOME}/spack/share/spack/setup-env.sh
+        [ $? == 0 ] && echo "loaded $(which spack): $(spack -V)"
+    else 
+        . $1/share/spack/setup-env.sh
+        [ $? == 0 ] && echo "loaded $(which spack): $(spack -V)"
+    fi 
+    echo
+}
+
+function ld_prepend
+{
+    if [ $LD_LIBRARY_PATH == "" ]
+    then
+        export LD_LIBRARY_PATH=$1
+    else
+        export  LD_LIBRARY_PATH=$1:$LD_LIBRARY_PATH
+    fi
+}
+
+function ld_pop
+{
+    if [ $( echo $LD_LIBRARY_PATH | grep $1 ) == "" ]
+    then
+        echo "$1 not found in LD_LIBRARY_PATH" 
+    else
+        echo "removing $1 from LD_LIBRARY_PATH" 
+        export OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH #save it in case you mess up
+        export LD_LIBRARY_PATH=$( echo "$LD_LIBRARY_PATH" | sed "s|$1||g" )
+    fi
+}
+
+function ld_swap
+{
+    if [ $( echo $LD_LIBRARY_PATH | grep $1 ) == "" ]
+    then
+        echo "$1 not found in LD_LIBRARY_PATH" 
+    else
+        echo "swapping $1 for $2 in LD_LIBRARY_PATH" 
+        export OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH #save it in case you mess up
+        export LD_LIBRARY_PATH=$( echo "$LD_LIBRARY_PATH" | sed "s|$1|$2|g" )
+    fi
+}
+
+function set_fake
+{
+    export OLD_LD_PRELOAD=$LD_PRELOAD
+    export LD_PRELOAD=$LD_PRELOAD:/projects/Operations/willmore/libfake/libfake.so.1
+}
+
+function unset_fake
+{
+    export LD_PRELOAD=$OLD_LD_PRELOAD
+}
+
+function mkcd
+{
+    mkdir -p $1 && cd $1
+}
+
+# Add in any of my fucntions/tools
+#. /home/willmore/.shell-tools/.modloaddiff 
+#. /home/willmore/.shell-tools/.scope2env  
+
+              
+
+
