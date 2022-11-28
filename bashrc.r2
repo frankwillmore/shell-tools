@@ -120,7 +120,10 @@ function mkcd
 # Add in any of my fucntions/tools
 #. /home/willmore/.shell-tools/.modloaddiff 
 #. /home/willmore/.shell-tools/.scope2env  
-
               
+function spackify () 
+{ 
+    . /cm/shared/software/spack/share/spack/setup-env.sh
+}
 
 
