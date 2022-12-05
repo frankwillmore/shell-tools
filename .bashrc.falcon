@@ -122,5 +122,6 @@ function mkcd
 #. /home/willmore/.shell-tools/.scope2env  
 
               
+alias fadm="ssh root@fadm.admin.c3plus3.org"
 
 
