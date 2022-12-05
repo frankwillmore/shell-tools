@@ -117,15 +117,13 @@ function mkcd
     mkdir -p $1 && cd $1
 }
 
-function spackify
-{
-    . /cm/shared/software/spack/share/spack/setup-env.sh
-}
-
 # Add in any of my fucntions/tools
 #. /home/willmore/.shell-tools/.modloaddiff 
 #. /home/willmore/.shell-tools/.scope2env  
-
               
+function spackify () 
+{ 
+    . /cm/shared/software/spack/share/spack/setup-env.sh
+}
 
 

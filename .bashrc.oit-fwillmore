@@ -3,22 +3,28 @@
 # Basics
 
 export PS1="熊俊傑@\h:\W$ "
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Aliases
 
 alias ll='ls -l'
 alias la='ls -la'
 
-#alias interactive='qsub -A Operations -n 1 -t 360 -I -q gomez'
-#alias iris-debug='qsub -A Operations -n 1 -t 30 -I -q iris_debug'
-#alias iris='qsub -A Operations -n 1 -t 360 -I -q iris'
-#alias yarrow-debug='qsub -A Operations -n 1 -t 360 -I -q yarrow_debug'
-#alias clear-logs='rm *.{output,error,cobaltlog}'
+# Shortcuts
 
+alias r2="ssh -XC frankwillmore@r2-login.boisestate.edu"
+alias borah="ssh -YC frankwillmore@borah-login.boisestate.edu"
+
+alias falcon="ssh frank@repo.admin.c3plus3.org"
+alias falcon-slurm="ssh frank@slurm1.admin.c3plus3.org"
+alias falcon-fadm="ssh root@fadm.admin.c3plus3.org"
+
+alias s_r2="ssh -XC s_frankwillmore@r2-login.boisestate.edu"
+alias s_borah="ssh -XC s_frankwillmore@borah-login.boisestate.edu"
+
+alias ipcborah="ssh -XC ipcfrankwillmore@borah-ipclogin.boisestate.edu"
 
 # Exports and environment
-
-export PS1="熊俊傑@\h:\w$ "
 
 
 # Includes
@@ -117,15 +123,11 @@ function mkcd
     mkdir -p $1 && cd $1
 }
 
-function spackify
-{
-    . /cm/shared/software/spack/share/spack/setup-env.sh
-}
-
 # Add in any of my fucntions/tools
 #. /home/willmore/.shell-tools/.modloaddiff 
 #. /home/willmore/.shell-tools/.scope2env  
 
               
+
 
 
