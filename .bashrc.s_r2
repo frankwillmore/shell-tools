@@ -18,7 +18,7 @@ alias la='ls -la'
 
 # Exports and environment
 
-export PS1="熊俊傑@\h:\w$ "
+export PS1="s_熊俊傑@\h:\w$ "
 
 
 # Includes
