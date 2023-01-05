@@ -42,7 +42,7 @@ function fullpath()
     echo $(pwd)/$1
 }
 
-function load_spack 
+function spackify 
 {
     if [ "$1" == "-h" ]
     then
