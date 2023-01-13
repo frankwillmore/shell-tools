@@ -116,5 +116,5 @@ function mkcd
 
               
 alias fadm="ssh root@fadm.admin.c3plus3.org"
-
+alias node="cssh $@"
 
